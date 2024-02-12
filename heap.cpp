@@ -6,12 +6,14 @@ using namespace std;
 //Struct for a node:
 Struct node {
   int value; //has a value
-  node* child1; //has child nodes
-  node* child2;
+  node* parent = NULL; //has a parent
+  node* child1 = NULL; //has child nodes
+  node* child2 = NULL;
 };
 
 //Function Prototypes:
 void add(node*, node**);
+void check(node*, node**);
 void manualInput(node**);
 
 //Main function (this is where the user will input values):
@@ -40,10 +42,12 @@ void add(node* val, node* array[100]) {
 
       if (current -> child1 == NULL) {
 	child1 = val; //if the next child 1 is empty, just add the input there
+	child1 -> parent = current;//the parent was the current node
       }
 
       else if (current -> child2 == NULL) {
 	child2 = val; //otherwise, if the next child 2 is empty, just add the input there
+	child2 -> parent = current; //the parent was the current node
       }
 
       else { //else move down the binary tree
@@ -71,6 +75,10 @@ void add(node* val, node* array[100]) {
       }
     }
   }
+}
+
+//Check function (makes sure that the parent of the current node has a larger value than it; otherwise, it will swap the nodes)
+void check(node* val, node* array[100]) {
 }
 
 //Manual Input function (reads values from cin and calls "add" for each one):
