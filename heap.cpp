@@ -79,6 +79,17 @@ void add(node* val, node* array[100]) {
 
 //Check function (makes sure that the parent of the current node has a larger value than it; otherwise, it will swap the nodes)
 void check(node* val, node* array[100]) {
+
+  //Get the parties involved:
+  node* valC1 = val -> child1;
+  node* valC2 = val -> child2;
+  node* par = val -> parent;
+  node* sib = par -> child1;
+
+  if (sib == val) {
+    sib = par -> child2;
+  }  
+  
 }
 
 //Manual Input function (reads values from cin and calls "add" for each one):
