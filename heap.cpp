@@ -8,12 +8,13 @@ using namespace std;
 //Function Prototypes:
 void add(int, int* &);
 void check(int, int* &);
+void print(int* &);
 void manualInput(int* &);
 
 //Main function (this is where the user will input values):
 int main() {
   int mxh[100]; //this will be the max heap
-  int* mxhPnt = mxh;
+  int* mxhPnt = mxh; //pointer so I can pass by reference and edit this array just to be sure (will take out later)
   
   for (int i = 0; i < 100; i++) { //empty it
     bob[i] = NULL;
@@ -84,7 +85,7 @@ void add(int val, int* &array) {
 }
 
 //Check function (makes sure that the parent of the current node has a larger value than it; otherwise, it will swap the nodes)
-void check(int index, int &array) {
+void check(int index, int* &array) {
   int pInd = 0;
   
   if (index%2 == 0) {
@@ -118,19 +119,27 @@ void check(int index, int &array) {
     index = pInd;
     check(index, array);
   }
-  /*
-  //Get the parties involved:
-  node* valC1 = val -> child1;
-  node* valC2 = val -> child2;
-  node* par = val -> parent;
-  node* sib = par -> child1;
-
-  if (sib == val) {
-    sib = par -> child2;
-  }  
-  */
   return;
 }
+
+//Print function (prints out the heap as a tree!!!)
+void print(int* &array) {
+
+  int oldGen = 1;
+  int gen = 1; //generation # for some index in array (get the odd index of each generation and add 3 div 2)
+
+  char temp[100]; //will store each generation to print
+  
+  for (int i = 0; i < 100; i++) {
+
+    if (i == 0) {
+      gen = 1;
+    }
+    
+  }
+
+}
+
 
 //Manual Input function (reads values from cin and calls "add" for each one):
 void manualInput(node* array[100]) {
