@@ -130,12 +130,26 @@ void print(int* &array) {
 
   char temp[100]; //will store each generation to print
   
-  for (int i = 0; i < 100; i++) {
+  for (int i = 1; i < 100; i += 2) {
 
     if (i == 0) {
       gen = 1;
+      cout << (*array)[i]; //head
     }
-    
+
+    else {
+
+      if (i%2 == 1) {
+	gen = (i+3)/2;
+      }
+
+      else if (i%2 == 0) {
+	gen = (i+2)/2;
+      }
+
+      
+
+    }
   }
 
 }
