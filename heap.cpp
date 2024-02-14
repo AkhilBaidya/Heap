@@ -88,13 +88,36 @@ void check(int index, int array[100]) {
   int pInd = 0;
   
   if (index%2 == 0) {
-    pInd = (index/2) - 1; //the parent if the input value is on the right branch
+    pInd = (index - 1)/2; //the parent if the input value is on the right branch
   }
 
   else if (index%2 == 1) {
-    pInd = ((index + 1)/2) -1; //the parent if the input value is on the left branch
+    pInd = (index)/2; //the parent if the input value is on the left branch
   }
-  
+
+  if (pInd < 0) { //looking at the root
+    return;
+  }
+
+  else if (array[pInd] >= array[index]) {
+    return;
+  }
+
+  if (array[pInd] < array[index]) {
+
+    //then swap parent and child:
+    
+    int temp = array[pInd];
+
+    array[pInd] = array[index];
+    array[index] = temp;
+
+    delete temp;
+
+    //now recurse and check again for the same value but at its new position:
+    index = pInd;
+    check(index, array);
+  }
   /*
   //Get the parties involved:
   node* valC1 = val -> child1;
@@ -106,6 +129,7 @@ void check(int index, int array[100]) {
     sib = par -> child2;
   }  
   */
+  return;
 }
 
 //Manual Input function (reads values from cin and calls "add" for each one):
