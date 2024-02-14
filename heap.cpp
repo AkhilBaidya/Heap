@@ -30,8 +30,8 @@ void add(int val, int array[100]) {
     i++;
   }
 
-  array[i] = val;
-  check(i, array);
+  array[i] = val; //the next open spot is given to the input value
+  check(i, array); //reorder max heap such that every child is smaller than the parent
   
   /*
   node* current = array[0];
@@ -83,8 +83,18 @@ void add(int val, int array[100]) {
 }
 
 //Check function (makes sure that the parent of the current node has a larger value than it; otherwise, it will swap the nodes)
-void check(node* val, node* array[100]) {
+void check(int index, int array[100]) {
 
+  int pInd = 0;
+  
+  if (index%2 == 0) {
+    pInd = (index/2) - 1; //the parent if the input value is on the right branch
+  }
+
+  else if (index%2 == 1) {
+    pInd = ((index + 1)/2) -1; //the parent if the input value is on the left branch
+  }
+  
   /*
   //Get the parties involved:
   node* valC1 = val -> child1;
