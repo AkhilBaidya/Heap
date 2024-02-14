@@ -13,19 +13,26 @@ void manualInput(int*);
 //Main function (this is where the user will input values):
 int main() {
   int bob[100]; //this will be the max heap
-
-  /*
+  
   for (int i = 0; i < 100; i++) { //empty it
     bob[i] = NULL;
   }
-  */
   
   return 0;
 }
 
 //Add function (takes in a node and the current array and adds the node in the array according to the ordering of a max heap):
-void add(node* val, node* array[100]) {
+void add(int val, int array[100]) {
 
+  int i = 0;
+
+  while (array[i] != NULL) {
+    i++;
+  }
+
+  array[i] = val;
+  check(i, array);
+  
   /*
   node* current = array[0];
 
