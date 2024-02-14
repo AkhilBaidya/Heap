@@ -6,13 +6,14 @@ using namespace std;
 //So there's no need for pointers... (. _ .)
 
 //Function Prototypes:
-void add(int, int*);
-void check(int, int*);
-void manualInput(int*);
+void add(int, int* &);
+void check(int, int* &);
+void manualInput(int* &);
 
 //Main function (this is where the user will input values):
 int main() {
-  int bob[100]; //this will be the max heap
+  int mxh[100]; //this will be the max heap
+  int* mxhPnt = mxh;
   
   for (int i = 0; i < 100; i++) { //empty it
     bob[i] = NULL;
@@ -22,15 +23,15 @@ int main() {
 }
 
 //Add function (takes in a node and the current array and adds the node in the array according to the ordering of a max heap):
-void add(int val, int array[100]) {
+void add(int val, int* &array) {
 
   int i = 0;
 
-  while (array[i] != NULL) {
+  while ((*array)[i] != NULL) {
     i++;
   }
 
-  array[i] = val; //the next open spot is given to the input value
+  (*array)[i] = val; //the next open spot is given to the input value
   check(i, array); //reorder max heap such that every child is smaller than the parent
   
   /*
@@ -83,8 +84,7 @@ void add(int val, int array[100]) {
 }
 
 //Check function (makes sure that the parent of the current node has a larger value than it; otherwise, it will swap the nodes)
-void check(int index, int array[100]) {
-
+void check(int index, int &array) {
   int pInd = 0;
   
   if (index%2 == 0) {
@@ -99,18 +99,18 @@ void check(int index, int array[100]) {
     return;
   }
 
-  else if (array[pInd] >= array[index]) {
+  else if ((*array)[pInd] >= (*array)[index]) {
     return;
   }
 
-  if (array[pInd] < array[index]) {
+  if ((*array)[pInd] < (*array)[index]) {
 
     //then swap parent and child:
     
-    int temp = array[pInd];
+    int temp = (*array)[pInd];
 
-    array[pInd] = array[index];
-    array[index] = temp;
+    (*array)[pInd] = (*array)[index];
+    (*array)[index] = temp;
 
     delete temp;
 
