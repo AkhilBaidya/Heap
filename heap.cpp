@@ -3,26 +3,22 @@
 
 using namespace std;
 
-//Struct for a node:
-Struct node {
-  int value; //has a value
-  node* parent = NULL; //has a parent
-  node* child1 = NULL; //has child nodes
-  node* child2 = NULL;
-};
+//So there's no need for pointers... (. _ .)
 
 //Function Prototypes:
-void add(node*, node**);
-void check(node*, node**);
-void manualInput(node**);
+void add(int, int*);
+void check(int, int*);
+void manualInput(int*);
 
 //Main function (this is where the user will input values):
 int main() {
-  node* bob[100]; //this will be the max heap
+  int bob[100]; //this will be the max heap
 
+  /*
   for (int i = 0; i < 100; i++) { //empty it
     bob[i] = NULL;
   }
+  */
   
   return 0;
 }
@@ -30,6 +26,7 @@ int main() {
 //Add function (takes in a node and the current array and adds the node in the array according to the ordering of a max heap):
 void add(node* val, node* array[100]) {
 
+  /*
   node* current = array[0];
 
   if (current == NULL) { //there's nothing in the max heap, so just add the input
@@ -75,11 +72,13 @@ void add(node* val, node* array[100]) {
       }
     }
   }
+  */
 }
 
 //Check function (makes sure that the parent of the current node has a larger value than it; otherwise, it will swap the nodes)
 void check(node* val, node* array[100]) {
 
+  /*
   //Get the parties involved:
   node* valC1 = val -> child1;
   node* valC2 = val -> child2;
@@ -89,7 +88,7 @@ void check(node* val, node* array[100]) {
   if (sib == val) {
     sib = par -> child2;
   }  
-  
+  */
 }
 
 //Manual Input function (reads values from cin and calls "add" for each one):
