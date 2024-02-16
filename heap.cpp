@@ -8,7 +8,7 @@ using namespace std;
 //Function Prototypes:
 void add(int, int* &);
 void check(int, int* &);
-void print(int* &);
+void print(int* &, int, int);
 void manualInput(int* &);
 
 //Main function (this is where the user will input values):
@@ -23,9 +23,9 @@ int main() {
   add(5, mxhPnt);
   add(3, mxhPnt);
   add(4,mxhPnt);
-  print(mxhPnt);
+  //print(mxhPnt, 0, 0);
   add(6, mxhPnt);
-  print(mxhPnt);
+  print(mxhPnt, 0, 0);
 
   //for (int i = 0; i<100; i++) {
   //cout << mxhPnt[i] << "," << endl; //great news my adding works!
@@ -92,7 +92,6 @@ void add(int val, int* &array) {
     }
   }
   */
-  cout << "added" << endl;
 }
 
 //Check function (makes sure that the parent of the current node has a larger value than it; otherwise, it will swap the nodes)
@@ -134,14 +133,20 @@ void check(int index, int* &array) {
 //Print function (prints out the heap as a tree!!!)
 void print(int* &array, int index, int count) {
 
-  if (array[2(index)+2] != -5) {
-    print(array, 2(index) + 2, count++); //count to read depth, suggested by Mr. Galbraith (also going by his method of going down one branch first)
+  if (array[(2*index)+2] != -5) {
+    print(array, (2*index) + 2, count++); //count to read depth, suggested by Mr. Galbraith (also going by his method of going down one branch first)
+  }
+  
+  if (array[(2*index)+1] != -5) {
+    print(array, (2*index) + 1, count++); //go down left
   }
 
-  //if (array[2(index)+1] != -5) {
-  //print(array, 2(index
-  //}
-  
+  cout << "printing this one with count" << count << endl;
+  for (int i = 0; i < count; i++) {//tab by the count
+    cout << "\t";
+  }
+  cout << array[index] << endl; 
+  return;
   
   /*
   cout << "going to print" << endl;
