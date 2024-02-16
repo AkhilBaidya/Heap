@@ -17,9 +17,15 @@ int main() {
   int* mxhPnt = mxh; //pointer so I can pass by reference and edit this array just to be sure (will take out later)
   
   for (int i = 0; i < 100; i++) { //empty it
-    bob[i] = NULL;
+  mxh[i] = -5;
   }
-  
+
+  add(5, mxhPnt);
+  add(3, mxhPnt);
+  add(4,mxhPnt);
+  print(mxhPnt);
+  add(6, mxhPnt);
+  print(mxhPnt);
   return 0;
 }
 
@@ -28,11 +34,11 @@ void add(int val, int* &array) {
 
   int i = 0;
 
-  while ((*array)[i] != NULL) {
+  while ((array)[i] != -5) {
     i++;
   }
 
-  (*array)[i] = val; //the next open spot is given to the input value
+  array[i] = val; //the next open spot is given to the input value
   check(i, array); //reorder max heap such that every child is smaller than the parent
   
   /*
@@ -82,6 +88,7 @@ void add(int val, int* &array) {
     }
   }
   */
+  cout << "added" << endl;
 }
 
 //Check function (makes sure that the parent of the current node has a larger value than it; otherwise, it will swap the nodes)
@@ -100,20 +107,18 @@ void check(int index, int* &array) {
     return;
   }
 
-  else if ((*array)[pInd] >= (*array)[index]) {
+  else if (array[pInd] >= array[index]) {
     return;
   }
 
-  if ((*array)[pInd] < (*array)[index]) {
+  if (array[pInd] < array[index]) {
 
     //then swap parent and child:
     
-    int temp = (*array)[pInd];
+    int temp = array[pInd];
 
-    (*array)[pInd] = (*array)[index];
-    (*array)[index] = temp;
-
-    delete temp;
+    array[pInd] = array[index];
+    array[index] = temp;
 
     //now recurse and check again for the same value but at its new position:
     index = pInd;
@@ -128,10 +133,10 @@ void print(int* &array) {
   int oldGen = 1;
   int gen = 1; //generation # for some index in array (get the odd index of each generation and add 3 div 2)
 
-  char temp[100]; //will store each generation to print
+  char* temp; //will store each generation to print
   int skip = 2;
 
-  cout << (*array)[i];
+  cout << array[0];
   
   for (int i = 1; i < 100; i += skip) {
     
@@ -144,16 +149,25 @@ void print(int* &array) {
       }
 
       for (int j = i; j < i+skip; j++) { //for the next n elements
-	(*array)[j] >> temp;
-
+     
+	temp = temp + array[j];
+	
 	int num = 3 * (2 ^ (6 - gen));
 
-	(num * '\n') >> temp; //add specified num of spaces
+
+	for (int k = 0; k < num; k++) {
+	  temp = temp + '\n';
+	}
+     
       }
 
-      cout << temp;
-      temp = "";
-      skip = skip * 2; //go by powers of 2
+    cout << temp;
+	//for (int i = 0; i < 100; i++) {
+	//temp[i] = ;
+	//}
+	temp = NULL;
+	
+    skip = skip * 2; //go by powers of 2
       
       //this would result in very wide trees (the #of spaces in the first gen will be fixed at around 48
 
@@ -162,5 +176,5 @@ void print(int* &array) {
 
 
 //Manual Input function (reads values from cin and calls "add" for each one):
-void manualInput(node* array[100]) {
+void manualInput(int* array) {
 }
