@@ -26,6 +26,10 @@ int main() {
   print(mxhPnt);
   add(6, mxhPnt);
   print(mxhPnt);
+
+  //for (int i = 0; i<100; i++) {
+  //cout << mxhPnt[i] << "," << endl; //great news my adding works!
+  //}
   return 0;
 }
 
@@ -128,8 +132,18 @@ void check(int index, int* &array) {
 }
 
 //Print function (prints out the heap as a tree!!!)
-void print(int* &array) {
+void print(int* &array, int index, int count) {
 
+  if (array[2(index)+2] != -5) {
+    print(array, 2(index) + 2, count++); //count to read depth, suggested by Mr. Galbraith (also going by his method of going down one branch first)
+  }
+
+  //if (array[2(index)+1] != -5) {
+  //print(array, 2(index
+  //}
+  
+  
+  /*
   cout << "going to print" << endl;
   int oldGen = 1;
   int gen = 1; //generation # for some index in array (get the odd index of each generation and add 3 div 2)
@@ -179,7 +193,7 @@ void print(int* &array) {
       
       //this would result in very wide trees (the #of spaces in the first gen will be fixed at around 48
 
-    }
+      }*/
 }
 
 
