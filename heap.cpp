@@ -130,33 +130,40 @@ void check(int index, int* &array) {
 //Print function (prints out the heap as a tree!!!)
 void print(int* &array) {
 
+  cout << "going to print" << endl;
   int oldGen = 1;
   int gen = 1; //generation # for some index in array (get the odd index of each generation and add 3 div 2)
 
   char* temp; //will store each generation to print
-  int skip = 2;
+  int skip = 1;
 
   cout << array[0];
   
   for (int i = 1; i < 100; i += skip) {
-    
-      if (i%2 == 1) {
+
+    cout << "looking at " << i << endl;
+
+    if (i%2 == 1) {
 	gen = (i+3)/2;
-      }
+     }
 
       else if (i%2 == 0) {
 	gen = (i+2)/2;
       }
 
+    cout << "got generations" << endl;
+
       for (int j = i; j < i+skip; j++) { //for the next n elements
      
 	temp = temp + array[j];
+	cout << "added to temp" << endl;
 	
 	int num = 3 * (2 ^ (6 - gen));
 
 
 	for (int k = 0; k < num; k++) {
 	  temp = temp + '\n';
+	  cout << "added space" << endl;
 	}
      
       }
@@ -165,7 +172,8 @@ void print(int* &array) {
 	//for (int i = 0; i < 100; i++) {
 	//temp[i] = ;
 	//}
-	temp = NULL;
+	//temp = NULL;
+	//cout << "set to null" << endl;
 	
     skip = skip * 2; //go by powers of 2
       
