@@ -129,16 +129,12 @@ void print(int* &array) {
   int gen = 1; //generation # for some index in array (get the odd index of each generation and add 3 div 2)
 
   char temp[100]; //will store each generation to print
+  int skip = 2;
+
+  cout << (*array)[i];
   
-  for (int i = 1; i < 100; i += 2) {
-
-    if (i == 0) {
-      gen = 1;
-      cout << (*array)[i]; //head
-    }
-
-    else {
-
+  for (int i = 1; i < 100; i += skip) {
+    
       if (i%2 == 1) {
 	gen = (i+3)/2;
       }
@@ -147,11 +143,21 @@ void print(int* &array) {
 	gen = (i+2)/2;
       }
 
+      for (int j = i; j < i+skip; j++) { //for the next n elements
+	(*array)[j] >> temp;
+
+	int num = 3 * (2 ^ (6 - gen));
+
+	(num * '\n') >> temp; //add specified num of spaces
+      }
+
+      cout << temp;
+      temp = "";
+      skip = skip * 2; //go by powers of 2
       
+      //this would result in very wide trees (the #of spaces in the first gen will be fixed at around 48
 
     }
-  }
-
 }
 
 
