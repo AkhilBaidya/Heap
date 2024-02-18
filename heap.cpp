@@ -8,6 +8,8 @@ using namespace std;
 //Function Prototypes:
 void add(int, int* &);
 void check(int, int* &);
+void del(int* &);
+void delAll(int* &);
 void print(int* &, int, int);
 void manualInput(int* &);
 
@@ -212,6 +214,13 @@ void print(int* &array, int index, int count) {
       }*/
 }
 
+void del(int* &array) {
+  
+}
+
+void delAll(int* &array) {
+
+}
 
 //Manual Input function (reads values from cin and calls "add" for each one):
 void manualInput(int* array) {
