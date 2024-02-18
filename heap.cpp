@@ -156,7 +156,10 @@ void print(int* &array, int index, int count) {
   for (int i = 0; i < count; i++) {//tab by the count
     cout << "\t";
   }
+
+  if (array[index] != -5) {//just don't want to print out empty values
   cout << array[index] << endl;
+  }
   
   if (array[(2*index)+2] != -5) {
     //count = count + 1;
