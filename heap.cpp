@@ -25,11 +25,18 @@ int main() {
   add(4,mxhPnt);
   //print(mxhPnt, 0, 0);
   add(6, mxhPnt);
+  add(7, mxhPnt);
+  add(2, mxhPnt);
+  add(10, mxhPnt);
+  add(3, mxhPnt);
   print(mxhPnt, 0, 0);
 
-  //for (int i = 0; i<100; i++) {
-  //cout << mxhPnt[i] << "," << endl; //great news my adding works!
-  //}
+  cout << "now the actual array" << endl;
+  for (int i = 0; i<100; i++) {
+    if (mxhPnt[i] != -5) {
+    cout << mxhPnt[i] << "," << endl; //great news my adding works!
+    }
+  }
   return 0;
 }
 
@@ -133,19 +140,23 @@ void check(int index, int* &array) {
 //Print function (prints out the heap as a tree!!!)
 void print(int* &array, int index, int count) {
 
-  if (array[(2*index)+2] != -5) {
-    print(array, (2*index) + 2, count++); //count to read depth, suggested by Mr. Galbraith (also going by his method of going down one branch first)
-  }
-  
   if (array[(2*index)+1] != -5) {
-    print(array, (2*index) + 1, count++); //go down left
+    //count = count + 1;
+    print(array, (2*index) + 1, count+1); //count to read depth, suggested by Mr. Galbraith (also going by his method of going down one branch first)
   }
 
-  cout << "printing this one with count" << count << endl;
   for (int i = 0; i < count; i++) {//tab by the count
     cout << "\t";
   }
-  cout << array[index] << endl; 
+  cout << array[index] << endl;
+  
+  if (array[(2*index)+2] != -5) {
+    //count = count + 1;
+    print(array, (2*index) + 2, count+1); //go down left
+  }
+
+  //cout << "printing this one with count" << count << endl;
+   
   return;
   
   /*
