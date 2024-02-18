@@ -216,8 +216,9 @@ void print(int* &array, int index, int count) {
 
 void del(int* &array) {
 
+  cout << "Here's the deleted root value " << array[0] << endl;
   array[0] = -5; //root is gone!
-
+  
   for (int i = 1; i < 100; i++) {
     array[i-1] = array[i]; //move everything down 1 to fill the empty root!
   }
@@ -229,6 +230,11 @@ void del(int* &array) {
 
 void delAll(int* &array) {
 
+  for (int i = 0; i < 100; i++) {
+    if (array[0] != -5) { //if the array is not already empty
+      del(array);
+    }
+  }
 }
 
 //Manual Input function (reads values from cin and calls "add" for each one):
