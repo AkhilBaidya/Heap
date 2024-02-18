@@ -38,13 +38,7 @@ int main() {
   print(mxhPnt, 0,0);
   delAll(mxhPnt);
   print(mxhPnt, 0,0);
-  
-  /*cout << "now the actual array" << endl;
-  for (int i = 0; i<100; i++) {
-    if (mxhPnt[i] != -5) {
-    cout << mxhPnt[i] << "," << endl; //great news my adding works!
-    }
-    }*/
+ 
   return 0;
 }
 
@@ -59,54 +53,6 @@ void add(int val, int* &array) {
 
   array[i] = val; //the next open spot is given to the input value
   check(i, array); //reorder max heap such that every child is smaller than the parent
-  
-  /*
-  node* current = array[0];
-
-  if (current == NULL) { //there's nothing in the max heap, so just add the input
-    array[0] = val;
-  }
-
-  else {
-
-    while (current != NULL) {
-
-      if (current -> child1 == NULL) {
-	child1 = val; //if the next child 1 is empty, just add the input there
-	child1 -> parent = current;//the parent was the current node
-      }
-
-      else if (current -> child2 == NULL) {
-	child2 = val; //otherwise, if the next child 2 is empty, just add the input there
-	child2 -> parent = current; //the parent was the current node
-      }
-
-      else { //else move down the binary tree
-
-	int myval = val -> value;
-	int lefval = current -> child1 -> value;
-	int rightval = current -> child2 -> value;
-	
-	if (leftval > myval || leftval == myval  && rightval !> myval || leftval < myval && rightval < myval) { //going down the left takes precedence
-
-	  current = current -> child1;
-	}
-
-	else if (leftval == myval && rightval > myval || leftval < myval && rightval !< myval) { //otherwise go right
-
-	  current = current -> child2;
-	}
-
-	else {
-
-	  cout << "Error when going down binary tree" << endl;
-	  
-	}
-	
-      }
-    }
-  }
-  */
 }
 
 //Check function (makes sure that the parent of the current node has a larger value than it; otherwise, it will swap the nodes)
@@ -173,7 +119,7 @@ void print(int* &array, int index, int count) {
 
 void del(int* &array) {
 
-  cout << "Here's the deleted root value " << array[0] << endl;
+  cout << "Here's the deleted root value: " << array[0] << endl;
   array[0] = -5; //root is gone!
   
   for (int i = 1; i < 100; i++) {
