@@ -221,6 +221,10 @@ void del(int* &array) {
   for (int i = 1; i < 100; i++) {
     array[i-1] = array[i]; //move everything down 1 to fill the empty root!
   }
+
+  for (int i = 0; i < 100; i++) {
+    check(i, array); //need to make sure the array is organized
+  }
 }
 
 void delAll(int* &array) {
