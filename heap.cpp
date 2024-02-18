@@ -215,7 +215,12 @@ void print(int* &array, int index, int count) {
 }
 
 void del(int* &array) {
-  
+
+  array[0] = -5; //root is gone!
+
+  for (int i = 1; i < 100; i++) {
+    array[i-1] = array[i]; //move everything down 1 to fill the empty root!
+  }
 }
 
 void delAll(int* &array) {
