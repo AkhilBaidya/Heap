@@ -125,6 +125,7 @@ void del(int* &array, int &size, int &indexL) {
   
   delete[] oldArray;
   indexL = indexL - 1; //array shrunk by 1
+  checkChild(0, array); //reformat
   
   /*
   for (int i = 1; i < 100; i++) {
@@ -218,7 +219,26 @@ void checkChild(int &index, int* &array) {
     else {
       return;
     }
-    
-    
   }
+
+
+  else if (array[child1] != -5 && array[child1] > array[index]) { //swap with child1 is it is larger
+    int temp = array[child1];
+	array[child1] = array[index];
+	array[index] = temp; // from above
+	index = child1;
+  }
+
+  else if (array[child2] != -5 && array[child2] > array[index]) {
+    int temp = array[child2];
+	array[child2] = array[index];
+	array[index] = temp; //swap
+	index = child2;
+  }
+
+  else {
+    return; //there are empty spots
+  }
+
+  checkChild(index, array); //check again!
 }
