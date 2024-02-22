@@ -4,33 +4,37 @@
 
 using namespace std;
 
-//So there's no need for pointers... (. _ .)
-
 //Function Prototypes:
-void add(int, int* &);
-void check(int, int* &);
-void del(int* &);
+void add(int, int* &, int &);
+void check(int, int* &, int &);
+void del(int* &, int &, int &);
 void delAll(int* &);
 void print(int* &, int, int);
 void manualInput(int* &);
 void fileInput(int* &);
+void checkChild(int &, int* &);
 
 //Main function (this is where the user will input values):
 int main() {
-  int mxh[100]; //this will be the max heap
+
+  int size = 100; //initially
+  int mxh[size]; //this will be the max heap
   int* mxhPnt = mxh; //pointer so I can pass by reference and edit this array just to be sure (will take out later)
+  int indexL = 0; //last index added
+
+
   
   for (int i = 0; i < 100; i++) { //empty it
   mxh[i] = -5;
   }
 
-  manualInput(mxhPnt);
+  fileInput(mxhPnt);
   print(mxhPnt, 0, 0);
   return 0;
 }
 
 //Add function (takes in a node and the current array and adds the node in the array according to the ordering of a max heap):
-void add(int val, int* &array) {
+void add(int val, int* &array, int &indexL) {
 
   int i = 0;
 
@@ -39,11 +43,11 @@ void add(int val, int* &array) {
   }
 
   array[i] = val; //the next open spot is given to the input value
-  check(i, array); //reorder max heap such that every child is smaller than the parent
+  check(i, array, indexL); //reorder max heap such that every child is smaller than the parent
 }
 
 //Check function (makes sure that the parent of the current node has a larger value than it; otherwise, it will swap the nodes)
-void check(int index, int* &array) {
+void check(int index, int* &array, int &indexL) {
   int pInd = 0;
   
   if (index%2 == 0) {
@@ -73,6 +77,7 @@ void check(int index, int* &array) {
 
     //now recurse and check again for the same value but at its new position:
     index = pInd;
+    indexL = index; //the final spot 
     check(index, array);
   }
   return;
@@ -104,10 +109,23 @@ void print(int* &array, int index, int count) {
   return;
 }
 
-void del(int* &array) {
+void del(int* &array, int &size, int &indexL) {
 
   cout << "Here's the deleted root value: " << array[0] << endl;
-  array[0] = -5; //root is gone!
+  array[0] = -5; //root is gone
+
+  int* oldArray = array;
+
+  array = new int[size-1];
+  array[0] = oldArray[indexL];
+    
+  for (int i = 1; i < indexL + 1; i++) {
+    array[i] = oldArray[i];
+  }
+  
+  delete[] oldArray;
+  
+  
   /*
   for (int i = 1; i < 100; i++) {
     array[i-1] = array[i]; //move everything down 1 to fill the empty root!
@@ -169,4 +187,8 @@ void fileInput(int* &array) {
   }
 
   cout << "Finished adding numbers to max heap" << endl;
+}
+
+void checkChild(int &index, int* &array) {
+  
 }
