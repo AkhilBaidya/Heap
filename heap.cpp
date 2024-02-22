@@ -160,5 +160,13 @@ void fileInput(int* &array) {
   cout << "What is the name of the file you would like to read into the max heap? " << endl;
   cin >> answer;
 
-  ifstream theFile(answer);
+  ifstream theFile(answer); //source notes that the >> operator reads until white space and while loop can run using the file name:
+
+  while(theFile) {
+    int toAdd = 0;
+    theFile >> toAdd;
+    add(toAdd, array);
+  }
+
+  cout << "Finished adding numbers to max heap" << endl;
 }
