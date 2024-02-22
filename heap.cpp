@@ -29,7 +29,7 @@ int main() {
   cout << "Max heap ready for editing:" << endl;
 
   while (editing) {
-    cout << "Would you like to ADD to the max heap, DELETE the root, DELETE_ALL, or QUIT this program?" << endl;
+    cout << "Would you like to ADD to the max heap, DELETE the root, DELETE_ALL, PRINT the heap, or QUIT this program?" << endl;
     cin >> answer;
     
     if (!strcmp(answer, "ADD")) {
@@ -39,11 +39,11 @@ int main() {
       cout << "Would you like to add manually (MAN) or by file (FILE)?" << endl;
       cin >> inputType;
 
-      if (!strcmp(answer, "MAN")) {
+      if (!strcmp(inputType, "MAN")) {
 	manualInput(mxhPnt, indexL);
       }
 
-      else if (!strcmp(answer, "FILE")) {
+      else if (!strcmp(inputType, "FILE")) {
 	fileInput(mxhPnt, indexL);
       }
 
@@ -51,12 +51,34 @@ int main() {
 	cout << "Did not understand (please input capitalized commands)" << endl;
       }
     }
+
+    else if (!strcmp(answer, "DELETE")) {
+      del(mxhPnt, indexL);
+    }
+
+    else if (!strcmp(answer, "DELETE_ALL")) {
+      delAll(mxhPnt, indexL);
+    }
+
+    else if (!strcmp(answer, "PRINT")) {
+      print(mxhPnt, 0, 0);
+      cout << "for comparison: " << endl;
+      for (int i = 0; i < 100; i++) {
+	if (mxhPnt[i] != -5) {
+	  cout << mxhPnt[i] << ", ";
+	}
+      }
+    }
     
+    else if (!strcmp(answer, "QUIT")) {
+      cout << "Quitting..." << endl;
+      editing = false;
+    }
+
+    else {
+      cout << "Did not understand (please input capitalized commands)" << endl;
+    }
   }
-
-
-  
-
   return 0;
 }
 
@@ -112,10 +134,15 @@ void checkParent(int index, int* &array) {
 
 //Print function (prints out the heap as a tree!!!)
 void print(int* &array, int index, int count) {
-
+  /*
   if (array[(2*index)+1] != -5) {
     //count = count + 1;
     print(array, (2*index) + 1, count+1); //count to read depth, suggested by Mr. Galbraith (also going by his method of going down one branch first)
+    }*/
+
+  if (array[(2*index)+2] != -5) {
+    //count = count + 1;
+    print(array, (2*index) + 2, count+1); //go down left
   }
 
   for (int i = 0; i < count; i++) {//tab by the count
@@ -125,11 +152,15 @@ void print(int* &array, int index, int count) {
   if (array[index] != -5) {//just don't want to print out empty values
   cout << array[index] << endl;
   }
-  
-  if (array[(2*index)+2] != -5) {
+
+  if (array[(2*index)+1] != -5) {
+    //count = count + 1;
+    print(array, (2*index) + 1, count+1); //count to read depth, suggested by Mr. Galbraith (also going by his method of going down one branch first)
+  }
+    /*if (array[(2*index)+2] != -5) {
     //count = count + 1;
     print(array, (2*index) + 2, count+1); //go down left
-  }
+    }*/
 
   //cout << "printing this one with count" << count << endl;
    
@@ -186,11 +217,14 @@ void fileInput(int* &array, int &indexL) {
   cin >> answer;
 
   ifstream theFile(answer); //source notes that the >> operator reads until white space and while loop can run using the file name:
-
+  
   while(theFile) {
-    int toAdd = 0;
+    int toAdd = -5; //what we're adding is empty first (because the >> seems to read in the return as a number too)
     theFile >> toAdd;
-    add(toAdd, array, indexL);
+    if (toAdd != -5) { //if there is a valid non-empty number 
+      cout << "adding " << toAdd << endl;
+      add(toAdd, array, indexL);
+    }
   }
 
   cout << "Finished adding numbers to max heap" << endl;
