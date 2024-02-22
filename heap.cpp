@@ -191,21 +191,19 @@ void fileInput(int* &array) {
 
 void checkChild(int &index, int* &array) {
   //brought from above check function
-  int pInd = 0;
+  int child1 = (2 * index) + 1;
+  int child2 = (2 * index) + 2;
+
   
-  if (index%2 == 0) {
-    pInd = (index - 1)/2; //the parent if the input value is on the right branch
+  if (array[child1] > array[index]) {//swap with child 1
+    
   }
 
-  else if (index%2 == 1) {
-    pInd = (index)/2; //the parent if the input value is on the left branch
+  else if (array[child2] > array[index]) { //swap with child2
+
   }
 
-  if (pInd < 0) { //looking at the root
-    return;
-  }
-
-  else if (array[pInd] >= array[index]) {
+  else {
     return;
   }
 
