@@ -22,23 +22,8 @@ int main() {
   mxh[i] = -5;
   }
 
-  add(5, mxhPnt);
-  add(3, mxhPnt);
-  add(4,mxhPnt);
-  //print(mxhPnt, 0, 0);
-  add(6, mxhPnt);
-  add(7, mxhPnt);
-  add(2, mxhPnt);
-  add(10, mxhPnt);
-  add(3, mxhPnt);
+  manualInput(mxhPnt);
   print(mxhPnt, 0, 0);
-  del(mxhPnt);
-  print(mxhPnt, 0,0);
-  del(mxhPnt);
-  print(mxhPnt, 0,0);
-  delAll(mxhPnt);
-  print(mxhPnt, 0,0);
- 
   return 0;
 }
 
@@ -141,5 +126,28 @@ void delAll(int* &array) {
 }
 
 //Manual Input function (reads values from cin and calls "add" for each one):
-void manualInput(int* array) {
+void manualInput(int* &array) {
+  bool add = true;
+  int count = 0;
+  char answer;
+  int toAdd = 0;
+  
+  while (add && count < 100) {
+
+    //continue adding numbers
+    cout << "Would you like to add a value to the max heap? y/n" << endl;
+    cout << "(max of 100 numbers can be added - numbers should be between 1 - 1000)" << endl;
+    cin >> answer;
+
+    if (answer == 'y') { //add
+      cout << "Type the number you wish to add" << endl;
+      cin >> toAdd;
+      add(toAdd, array);
+    }
+
+    else {
+      add = false;
+    }
+  }
+  cout << "Finished adding numbers to max heap" << endl;
 }
