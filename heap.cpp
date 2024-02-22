@@ -8,11 +8,11 @@ using namespace std;
 void add(int, int* &, int &);
 void check(int, int* &, int &);
 void del(int* &, int &, int &);
-void delAll(int* &);
+void delAll(int* &, int &, int &);
 void print(int* &, int, int);
-void manualInput(int* &);
-void fileInput(int* &);
-void checkChild(int &, int* &);
+void manualInput(int* &, int &);
+void fileInput(int* & ,int &);
+void checkChild(int, int* &);
 
 //Main function (this is where the user will input values):
 int main() {
@@ -28,8 +28,15 @@ int main() {
   mxh[i] = -5;
   }
 
-  fileInput(mxhPnt);
+  manualInput(mxhPnt, indexL);
   print(mxhPnt, 0, 0);
+  delAll(mxhPnt, size, indexL);
+  print(mxhPnt, 0, 0);
+  manualInput(mxhPnt, indexL);
+  print(mxhPnt, 0, 0);
+  del(mxhPnt, size, indexL);
+  print(mxhPnt, 0, 0);
+  
   return 0;
 }
 
@@ -43,6 +50,7 @@ void add(int val, int* &array, int &indexL) {
   }
 
   array[i] = val; //the next open spot is given to the input value
+  indexL = i;
   check(i, array, indexL); //reorder max heap such that every child is smaller than the parent
 }
 
@@ -77,8 +85,8 @@ void check(int index, int* &array, int &indexL) {
 
     //now recurse and check again for the same value but at its new position:
     index = pInd;
-    indexL = index; //the final spot 
-    check(index, array);
+    //indexL = index; //the final spot 
+    check(index, array, indexL);
   }
   return;
 }
@@ -111,22 +119,32 @@ void print(int* &array, int index, int count) {
 
 void del(int* &array, int &size, int &indexL) {
 
+  
   cout << "Here's the deleted root value: " << array[0] << endl;
+  print(array, 0, 0);
   array[0] = -5; //root is gone
 
+  //cout << "making new array" << endl;
   int* oldArray = array;
-
+  print(array, 0, 0);
+  //cout << "again" << endl;
   array = new int[size-1];
+  for (int i = 0; i < size - 1; i++) {
+    array[i] = -5;
+  }
+  print(array, 0, 0);
+  //cout << "made new array" << endl;
   array[0] = oldArray[indexL];
-    
-  for (int i = 1; i < indexL + 1; i++) {
+  cout << oldArray[indexL] << " " << array[0] << endl;
+  for (int i = 1; i < indexL; i++) {
     array[i] = oldArray[i];
   }
-  
-  delete[] oldArray;
+  print(array, 0, 0);
+  //cout << "filled" << endl;
+  //cout << "deleted" << endl;
   indexL = indexL - 1; //array shrunk by 1
   checkChild(0, array); //reformat
-  
+  print(array, 0,0);
   /*
   for (int i = 1; i < 100; i++) {
     array[i-1] = array[i]; //move everything down 1 to fill the empty root!
@@ -137,17 +155,17 @@ void del(int* &array, int &size, int &indexL) {
   }*/
 }
 
-void delAll(int* &array) {
-
+void delAll(int* &array, int &size, int &indexL) {
   for (int i = 0; i < 100; i++) {
     if (array[0] != -5) { //if the array is not already empty
-      del(array);
+      del(array, size, indexL);
+      cout << "deleted val" << endl;
     }
-  }
+    }
 }
 
 //Manual Input function (reads values from cin and calls "add" for each one):
-void manualInput(int* &array) {
+void manualInput(int* &array, int &indexL) {
   bool adding = true;
   int count = 0;
   char answer;
@@ -163,7 +181,7 @@ void manualInput(int* &array) {
     if (answer == 'y') { //add
       cout << "Type the number you wish to add" << endl;
       cin >> toAdd;
-      add(toAdd, array);
+      add(toAdd, array, indexL);
     }
 
     else {
@@ -173,7 +191,7 @@ void manualInput(int* &array) {
   cout << "Finished adding numbers to max heap" << endl;
 }
 
-void fileInput(int* &array) {
+void fileInput(int* &array, int &indexL) {
   //used this source from the udacity team on ways to read in files: https://www.udacity.com/blog/2021/05/how-to-read-from-a-file-in-cpp.html
   char answer[50];
   cout << "What is the name of the file you would like to read into the max heap? " << endl;
@@ -184,19 +202,19 @@ void fileInput(int* &array) {
   while(theFile) {
     int toAdd = 0;
     theFile >> toAdd;
-    add(toAdd, array);
+    add(toAdd, array, indexL);
   }
 
   cout << "Finished adding numbers to max heap" << endl;
 }
 
-void checkChild(int &index, int* &array) {
+void checkChild(int index, int* &array) {
+  cout << "checking child" << endl;
   //brought from above check function
   int child1 = (2 * index) + 1;
   int child2 = (2 * index) + 2;
 
   if (array[child1] != -5 && array[child2] != -5) { //not empty children
-
 
     if (array[child1] > array[index] || array[child2] > array[index]) { //if there are larger children
 
@@ -239,6 +257,7 @@ void checkChild(int &index, int* &array) {
   else {
     return; //there are empty spots
   }
-
+  print(array, 0, 0);
   checkChild(index, array); //check again!
+  return;
 }
