@@ -18,11 +18,44 @@ void checkChild(int, int* &);
 int main() {
   int mxh[100]; //this will be the max heap
   int* mxhPnt = mxh; //pointer set as the array (for passing by reference later on)
-  int indexL = 0; //the index of the bottom-right most element in the tree representing the current max heap
+  int indexL = 0; //"Index Last": the index of the bottom-right most element in the tree representing the current max heap
+  bool editing = true; //editing the max heap
+  char answer[15];
   
   for (int i = 0; i < 100; i++) { //empty it
   mxh[i] = -5;
   }
+
+  cout << "Max heap ready for editing:" << endl;
+
+  while (editing) {
+    cout << "Would you like to ADD to the max heap, DELETE the root, DELETE_ALL, or QUIT this program?" << endl;
+    cin >> answer;
+    
+    if (!strcmp(answer, "ADD")) {
+
+      char inputType[15];
+
+      cout << "Would you like to add manually (MAN) or by file (FILE)?" << endl;
+      cin >> inputType;
+
+      if (!strcmp(answer, "MAN")) {
+	manualInput(mxhPnt, indexL);
+      }
+
+      else if (!strcmp(answer, "FILE")) {
+	fileInput(mxhPnt, indexL);
+      }
+
+      else {
+	cout << "Did not understand (please input capitalized commands)" << endl;
+      }
+    }
+    
+  }
+
+
+  
 
   return 0;
 }
