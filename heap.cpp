@@ -1,5 +1,6 @@
 #include <iostream>
 #include <cstring>
+#include <fstream>
 
 using namespace std;
 
@@ -12,6 +13,7 @@ void del(int* &);
 void delAll(int* &);
 void print(int* &, int, int);
 void manualInput(int* &);
+void fileInput(int* &);
 
 //Main function (this is where the user will input values):
 int main() {
@@ -106,14 +108,14 @@ void del(int* &array) {
 
   cout << "Here's the deleted root value: " << array[0] << endl;
   array[0] = -5; //root is gone!
-  
+  /*
   for (int i = 1; i < 100; i++) {
     array[i-1] = array[i]; //move everything down 1 to fill the empty root!
   }
 
   for (int i = 0; i < 100; i++) {
     check(i, array); //need to make sure the array is organized
-  }
+  }*/
 }
 
 void delAll(int* &array) {
@@ -127,12 +129,12 @@ void delAll(int* &array) {
 
 //Manual Input function (reads values from cin and calls "add" for each one):
 void manualInput(int* &array) {
-  bool add = true;
+  bool adding = true;
   int count = 0;
   char answer;
   int toAdd = 0;
   
-  while (add && count < 100) {
+  while (adding && count < 100) {
 
     //continue adding numbers
     cout << "Would you like to add a value to the max heap? y/n" << endl;
@@ -146,8 +148,17 @@ void manualInput(int* &array) {
     }
 
     else {
-      add = false;
+      adding = false;
     }
   }
   cout << "Finished adding numbers to max heap" << endl;
+}
+
+void fileInput(int* &array) {
+  //used this source from the udacity team on ways to read in files: https://www.udacity.com/blog/2021/05/how-to-read-from-a-file-in-cpp.html
+  char answer[50];
+  cout << "What is the name of the file you would like to read into the max heap? " << endl;
+  cin >> answer;
+
+  ifstream theFile(answer);
 }
