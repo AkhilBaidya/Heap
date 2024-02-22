@@ -194,32 +194,31 @@ void checkChild(int &index, int* &array) {
   int child1 = (2 * index) + 1;
   int child2 = (2 * index) + 2;
 
-  
-  if (array[child1] > array[index]) {//swap with child 1
+  if (array[child1] != -5 && array[child2] != -5) { //not empty children
+
+
+    if (array[child1] > array[index] || array[child2] > array[index]) { //if there are larger children
+
+      if (array[child1] < array[child2]) {
+	int temp = array[child2];
+	array[child2] = array[index];
+	array[index] = temp; //swap
+	index = child2;
+      }
+
+      else {
+	int temp = array[child1];
+	array[child1] = array[index];
+	array[index] = temp; //swap with the other
+	index = child1;
+      }
+      
+    }
+
+    else {
+      return;
+    }
+    
     
   }
-
-  else if (array[child2] > array[index]) { //swap with child2
-
-  }
-
-  else {
-    return;
-  }
-
-  if (array[pInd] < array[index]) {
-
-    //then swap parent and child:
-    
-    int temp = array[pInd];
-
-    array[pInd] = array[index];
-    array[index] = temp;
-
-    //now recurse and check again for the same value but at its new position:
-    index = pInd;
-    indexL = index; //the final spot 
-    check(index, array);
-  }
-  return;
 }
