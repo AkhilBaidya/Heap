@@ -190,6 +190,7 @@ void fileInput(int* &array) {
 }
 
 void checkChild(int &index, int* &array) {
+  //brought from above check function
   int pInd = 0;
   
   if (index%2 == 0) {
